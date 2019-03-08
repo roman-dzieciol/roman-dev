@@ -5,7 +5,7 @@ module.exports = {
     description: `The fun is in details`,
     siteUrl: `https://roman.dev/`,
     social: {
-      twitter: `roman_dzieciol`,
+      twitter: `iOSRomanDev`,
     },
   },
   plugins: [
