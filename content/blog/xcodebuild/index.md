@@ -155,7 +155,7 @@ Later it's usefult to have access to all the methods and properties of `Xcode3Co
 
 Add the decompiled snippet to the main method:
 
-~~~objc
+```objc
 #import <Foundation/Foundation.h>
 #import "Xcode3CommandLineBuildTool.h"
 
@@ -184,7 +184,7 @@ int main(int argc, const char * argv[]) {
         return (int)buildTool.exitStatus;
     }
 }
-~~~
+```
 
 
 # Compile `myxcodebuild`
