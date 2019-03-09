@@ -2,4 +2,4 @@
 import "typeface-montserrat"
 import "typeface-merriweather"
 
-require("node_modules/prismjs/themes/prism-solarizedlight.css")
+require("prismjs/themes/prism-solarizedlight.css")
