@@ -27,6 +27,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          "remark-preset-lint-recommended",
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -69,10 +70,23 @@ module.exports = {
               // Defaults to false.
               // If you wish to only show line numbers on certain code blocks,
               // leave false and use the {numberLines: true} syntax below
-              showLineNumbers: false,
+              numberLines: 1,
               // If setting this to true, the parser won't handle and highlight inline
               // code used in markdown i.e. single backtick code like `this`.
-              noInlineHighlight: false,
+              noInlineHighlight: true,
+            },
+          },
+          {
+            resolve: "gatsby-remark-embed-gist",
+            options: {
+              // Optional:
+
+              // the github handler whose gists are to be accessed
+              username: "roman-dzieciol",
+
+              // a flag indicating whether the github default gist css should be included or not
+              // default: true
+              includeDefaultCss: true,
             },
           },
           `gatsby-remark-copy-linked-files`,
