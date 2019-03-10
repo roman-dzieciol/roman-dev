@@ -190,17 +190,12 @@ Those are relative to location of `xcodebuild` inside Xcode.app bundle, effectiv
 
 We can use the Xcode libraries as they are inside Xcode.app, we don't need to copy them.
 
-*The order in which libraries are listed is important - add them in the order they are listed in `otool -l`. You can add them in another order, but this may require adding more search paths.*
+Tip: The `Linked Frameworks And Libraries` list on the `General` tab of `myxcodebuild` target can add frameworks which aren't on the list. Use the `Add Other...` button to locate them. 
+
+To navigate inside the Xcode.app bundle press `Command+Shift+G` in the picker window and paste the path to directory in which framework is located:
+![add-other.png](add-other.png)
 
 ![linked-libraries.png](linked-libraries.png)
-
-### Add Xcode Frameworks
-
-Add framework bundles to `Linked Frameworks And Libraries` using the `Add Other...` button:
-
-* `/Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework`
-* `/Applications/Xcode.app/Contents/SharedFrameworks/DVTDeviceFoundation.framework`
-* `/Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework`
 
 ### Add Xcode Plugins
 
@@ -209,6 +204,20 @@ For plugins we need to add the binary directly rather than adding the directory.
 Add `Xcode3Core` binary to `Linked Frameworks And Libraries` using the `Add Other...` button:
 
 * `/Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/MacOS/Xcode3Core`
+
+### Add Xcode Frameworks
+
+Add framework bundles to `Linked Frameworks And Libraries` using the `Add Other...` button:
+
+* `/Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework`
+* `/Applications/Xcode.app/Contents/SharedFrameworks/DVTDeviceFoundation.framework`
+* `/Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework`
+
+### Verify library order
+
+The order in which libraries are listed is important - they should appear on the `Linked Frameworks And Libraries` list in the order they are listed in `otool -l`.
+
+*You can have them in another order, but this may require adding more search paths.*
 
 
 ## Add custom build settings
@@ -268,6 +277,9 @@ And that's it! Now you have your own personal xcodebuild and access to all of Xc
 
 *Happy programming!*
 
+# Appendix: myxcodebuild on GitHub
+
+[https://github.com/roman-dzieciol/myxcodebuild](https://github.com/roman-dzieciol/myxcodebuild)
 
 # Appendix: Make Xcode project work in any location
 
