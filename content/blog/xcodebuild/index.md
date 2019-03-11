@@ -1,7 +1,7 @@
 ---
 title: Lets build our own xcodebuild!
 date: "2019-03-08T05:20:10.000Z"
-description: ""
+description: "The xcodebuild is the tool used to compile iOS & macOS projects from commandline. We can write our own. It's simpler than you think!"
 tags: ['Xcode', 'xcodebuild']
 ---
 
