@@ -2,7 +2,7 @@
 title: Log all the things with Log Aspects
 date: "2019-03-10T05:20:10.000Z"
 description: "This will set most logging to maximum level. A sample app will result in about 50 lines of logs at level 1 and about 20000 lines at level 3."
-tags: ['Xcode', 'xcodebuild']
+tags: ['Xcode', 'xcodebuild', 'undocumented']
 ---
 
 For when you really need to log all the things
