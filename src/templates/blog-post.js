@@ -5,19 +5,22 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import kebabCase from "lodash/kebabCase"
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     const { previous, next } = this.props.pageContext
+    const group = this.props.data.allMarkdownRemark.group
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={this.props.location} title={siteTitle} group={group}>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
+
         <h1>{post.frontmatter.title}</h1>
         <p
           style={{
@@ -27,6 +30,23 @@ class BlogPostTemplate extends React.Component {
             marginTop: rhythm(-1),
           }}
         >
+          <ul
+            style={{
+              margin: "0px",
+            }}
+          >
+            {post.frontmatter.tags.map(tag => (
+              <li
+                style={{
+                  margin: "0px 1em 0px 0.0em",
+                  display: "inline",
+                }}
+                key={tag.fieldValue}
+              >
+                <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
+              </li>
+            ))}
+          </ul>
           {post.frontmatter.date}
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
@@ -74,6 +94,12 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+      }
+    }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {

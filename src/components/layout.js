@@ -2,12 +2,85 @@ import React from "react"
 import { Link } from "gatsby"
 
 import { rhythm, scale } from "../utils/typography"
+import kebabCase from "lodash/kebabCase"
+
+import twitterIcon from "../../content/assets/twitter-icon.png"
+import githubIcon from "../../content/assets/github-icon.png"
+import linkedinIcon from "../../content/assets/linkedin-icon.png"
+
+const TagsSidebar = ({ group }) => (
+  <div>
+    <div>
+      <h3>About</h3>
+      <ul>
+        <li style={{}}>
+          <img
+            src={twitterIcon}
+            alt="Twitter Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+              lineHeight: "1em",
+              margin: "0px",
+            }}
+          />
+          &nbsp;
+          <a href={`https://twitter.com/iOSRomanDev`}>Twitter</a>
+        </li>
+        <li>
+          <img
+            src={githubIcon}
+            alt="GitHub Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+              lineHeight: "1em",
+              margin: "0px",
+            }}
+          />
+          &nbsp;
+          <a href={`https://github.com/roman-dzieciol`}>GitHub</a>
+        </li>
+        <li>
+          <img
+            src={linkedinIcon}
+            alt="LinkedIn Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+              lineHeight: "1em",
+              margin: "0px",
+            }}
+          />
+          &nbsp;
+          <a href={`https://www.linkedin.com/in/romandzieciol/`}>LinkedIn</a>
+        </li>
+        <li>
+          <a href={`mailto:roman.dzieciol@gmail.com`}><span role='img' aria-label='email'>✉️</span> Email</a>
+        </li>
+      </ul>
+
+      <h3>Tags</h3>
+      <ul>
+        {group.map(tag => (
+          <li key={tag.fieldValue} style={{}}>
+            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+              {tag.fieldValue}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+)
 
 class Layout extends React.Component {
   render() {
-    const { location, title, children } = this.props
+    const { location, title, group, children } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
     let header
+
+    console.log(group)
 
     if (location.pathname === rootPath) {
       header = (
@@ -51,22 +124,73 @@ class Layout extends React.Component {
         </h3>
       )
     }
+
     return (
       <div
         style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(32),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          display: "flex",
+          alignItems: "flex-start",
+          alignContent: "center",
+          justifyContent: "center",
+          //backgroundColor: "green",
         }}
       >
-        <header>{header}</header>
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <div
+          style={{
+            width: rhythm(8),
+            //backgroundColor: "red",
+            position: "-webkit-sticky",
+            top: "0",
+          }}
+        />
+
+        <div
+          style={{
+            maxWidth: rhythm(32),
+            //backgroundColor: "orange",
+          }}
+        >
+          <div
+            style={{
+              padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+              //backgroundColor: "yellow",
+            }}
+          >
+            <header
+              style={
+                {
+                  //backgroundColor: "blue",
+                }
+              }
+            >
+              {header}
+            </header>
+            <main>{children}</main>
+          </div>
+          <footer
+            style={
+              {
+                //backgroundColor: "blue",
+              }
+            }
+          >
+            © {new Date().getFullYear()}, Built with
+            {` `}
+            <a href="https://www.gatsbyjs.org">Gatsby</a>
+          </footer>
+        </div>
+
+        <div
+          style={{
+            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+            width: rhythm(8),
+            //backgroundColor: "red",
+            position: "-webkit-sticky",
+            top: "0",
+          }}
+        >
+          {group && <TagsSidebar group={group} />}
+        </div>
       </div>
     )
   }
