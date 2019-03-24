@@ -35,7 +35,7 @@ Available aspects when running xcodebuild:
 To enable individual log level, add it to the commandline with `LogLevel` postfix:
 
 ```
-/Applications/Xcode.app/Contents/MacOS/Xcode -DVTDefaultLogLevel 3
+xcodebuild -xcodebuildDebugLogLevel=3
 ```
 
 `gist:roman-dzieciol/f7e16be760867488adf17bb9ed768964?file=xcodebuildDebugLogLevel.log`
