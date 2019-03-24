@@ -4,34 +4,47 @@ import PropTypes from "prop-types"
 // Components
 import { Link, graphql } from "gatsby"
 
-const Tags = ({ pageContext, data }) => {
-  const { tag } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
+import Bio from "../components/bio"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
-  return (
-    <div>
-      <h1>{tagHeader}</h1>
-      <ul>
-        {edges.map(({ node }) => {
-          const { slug } = node.fields
-          const { title } = node.frontmatter
-          return (
-            <li key={slug}>
-              <Link to={slug}>{title}</Link>
-            </li>
-          )
-        })}
-      </ul>
-      {/*
-              This links to a page that does not yet exist.
-              We'll come back to it!
-            */}
-      <Link to="/tags">All tags</Link>
-    </div>
-  )
+class Tags extends React.Component {
+  render() {
+    const { data } = this.props
+    const siteTitle = data.site.siteMetadata.title
+    const group = data.allMarkdownRemark.group
+    const { tag } = data.allMarkdownRemark
+    const { edges, totalCount } = data.allMarkdownRemark
+    const tagHeader = `${totalCount} post${
+      totalCount === 1 ? "" : "s"
+    } tagged with "${tag}"`
+
+    return (
+      <Layout location={this.props.location} title={siteTitle} group={group}>
+        <SEO
+          title="All posts"
+          keywords={[`blog`, `gatsby`, `javascript`, `react`]}
+        />
+        <Bio />
+        <div>
+          <h1>{tagHeader}</h1>
+          <ul>
+            {edges.map(({ node }) => {
+              const { slug } = node.fields
+              const { title } = node.frontmatter
+              return (
+                <li key={slug}>
+                  <Link to={slug}>{title}</Link>
+                </li>
+              )
+            })}
+          </ul>
+          <br />
+          <Link to="/tags">All tags</Link>
+        </div>
+      </Layout>
+    )
+  }
 }
 
 Tags.propTypes = {
@@ -61,11 +74,22 @@ export default Tags
 
 export const pageQuery = graphql`
   query($tag: String) {
+    site {
+      siteMetadata {
+        title
+        author
+      }
+    }
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
+
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
       totalCount
       edges {
         node {
