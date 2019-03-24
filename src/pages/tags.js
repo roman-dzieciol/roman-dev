@@ -8,30 +8,52 @@ import kebabCase from "lodash/kebabCase"
 import { Helmet } from "react-helmet"
 import { Link, graphql } from "gatsby"
 
-const TagsPage = ({
-  data: {
-    allMarkdownRemark: { group },
-    site: {
-      siteMetadata: { title },
-    },
-  },
-}) => (
-  <div>
-    <Helmet title={title} />
-    <div>
-      <h1>Tags</h1>
-      <ul>
-        {group.map(tag => (
-          <li key={tag.fieldValue}>
-            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </div>
-)
+import Bio from "../components/bio"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+
+// const TagsPage = ({
+//   data: {
+//     allMarkdownRemark: { group },
+//     site: {
+//       siteMetadata: { title },
+//     },
+//   },
+// }) => (
+
+class TagsPage extends React.Component {
+  render() {
+    const { data } = this.props
+    const siteTitle = data.site.siteMetadata.title
+    const group = data.allMarkdownRemark.group
+
+    return (
+      <Layout location={this.props.location} title={siteTitle} group={group}>
+        <SEO
+          title="All posts"
+          keywords={[`blog`, `gatsby`, `javascript`, `react`]}
+        />
+        <Bio />
+
+        <div>
+          <Helmet title={siteTitle} />
+          <div>
+            <h1>Tags</h1>
+            <ul>
+              {group.map(tag => (
+                <li key={tag.fieldValue}>
+                  <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+                    {tag.fieldValue} ({tag.totalCount})
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Layout>
+    )
+  }
+}
 
 TagsPage.propTypes = {
   data: PropTypes.shape({
