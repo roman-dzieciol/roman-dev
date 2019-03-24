@@ -8,6 +8,10 @@ import twitterIcon from "../../content/assets/twitter-icon.png"
 import githubIcon from "../../content/assets/github-icon.png"
 import linkedinIcon from "../../content/assets/linkedin-icon.png"
 
+import graphqlIcon from "../../content/assets/graphql-icon.png"
+import gatsbyjsIcon from "../../content/assets/gatsby-icon.png"
+import reactjsIcon from "../../content/assets/react-icon.png"
+
 const TagsSidebar = ({ group }) => (
   <div>
     <div>
@@ -137,7 +141,8 @@ class Layout extends React.Component {
       >
         <div
           style={{
-            width: rhythm(8),
+            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+            width: '20%',
             //backgroundColor: "red",
             position: "-webkit-sticky",
             top: "0",
@@ -146,6 +151,7 @@ class Layout extends React.Component {
 
         <div
           style={{
+            width: '60%',
             maxWidth: rhythm(32),
             //backgroundColor: "orange",
           }}
@@ -174,8 +180,42 @@ class Layout extends React.Component {
               }
             }
           >
-            © {new Date().getFullYear()}, Built with
+            © {new Date().getFullYear()}, Built with <span role='img' aria-label='love'>❤️✨💛</span>
             {` `}
+          <img
+            src={reactjsIcon}
+            alt="ReactJS Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+              lineHeight: "1em",
+              margin: "0px 4px 0px 10px",
+            }}
+          />
+            <a href="https://www.reactjs.org">ReactJS</a>
+            {` `}
+          <img
+            src={graphqlIcon}
+            alt="GraphQL Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+              lineHeight: "1em",
+              margin: "0px 4px 0px 10px",
+            }}
+          />
+            <a href="https://graphql.org">GraphQL</a>
+            {` `}
+          <img
+            src={gatsbyjsIcon}
+            alt="GatsbyJS Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+              lineHeight: "1em",
+              margin: "0px 4px 0px 10px",
+            }}
+          />
             <a href="https://www.gatsbyjs.org">Gatsby</a>
           </footer>
         </div>
@@ -183,7 +223,7 @@ class Layout extends React.Component {
         <div
           style={{
             padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-            width: rhythm(8),
+            width: '20%',
             //backgroundColor: "red",
             position: "-webkit-sticky",
             top: "0",
