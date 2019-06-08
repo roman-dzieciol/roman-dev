@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "E54RQ2YKR5.dev.roman",
+        "paths": ["/rn-twitter/*"]
+      }
+    ]
+  }
+}
